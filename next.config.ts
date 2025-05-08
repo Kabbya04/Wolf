@@ -1,19 +1,13 @@
-import type { NextConfig } from "next";
-import path from 'path';
-
-const nextConfig: NextConfig = {
-  /* config options here */
-  ebpack: (config: { resolve: { fallback: any; }; }, { isServer }: any) => {
-    // This is to handle the canvas module in the browser environment
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  webpack: (config: any, { isServer }: any) => {
+    // Add custom Webpack configuration here if needed
     if (!isServer) {
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        canvas: false,
-      };
+      // Example: Modify client-side Webpack config
     }
-    
     return config;
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;

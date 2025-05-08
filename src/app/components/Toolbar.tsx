@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import {
   Hand,
   MousePointer,
@@ -25,7 +25,6 @@ export default function Toolbar({ onToolSelect = () => {}, onColorChange = () =>
   const [selectedTool, setSelectedTool] = useState<string | null>('pen'); // Default to pen tool
   const [selectedColor, setSelectedColor] = useState<string>('#000000');
   const [showColorPicker, setShowColorPicker] = useState<boolean>(false);
-  const colorPickerRef = useRef<HTMLDivElement>(null);
 
   const tools = [
     { name: 'palette', icon: Palette, label: 'Color Picker' },

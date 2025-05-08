@@ -59,13 +59,13 @@ export default function Canvas({ tool: initialTool = 'pen', color: initialColor 
 
   // Sync tool prop with state
   useEffect(() => {
-    console.log('Tool prop changed to:', initialTool); // Debug log
+    console.log('Tool prop changed to:', initialTool);
     setTool(initialTool);
   }, [initialTool]);
 
   // Sync color prop with state
   useEffect(() => {
-    console.log('Color prop changed to:', initialColor); // Debug log
+    console.log('Color prop changed to:', initialColor);
     setColor(initialColor);
   }, [initialColor]);
 
@@ -115,7 +115,7 @@ export default function Canvas({ tool: initialTool = 'pen', color: initialColor 
   }, [selectedIds]);
 
   const handleMouseDown = (e: Konva.KonvaEventObject<MouseEvent>) => {
-    console.log('Current tool in handleMouseDown:', tool); // Debug log
+    console.log('Current tool in handleMouseDown:', tool);
     const stage = e.target.getStage();
     if (!stage || !stageRef.current) return;
 
@@ -222,8 +222,6 @@ export default function Canvas({ tool: initialTool = 'pen', color: initialColor 
     }
 
     if (tool === 'image') {
-      // Image tool relies on the Toolbar triggering the file input
-      // No action needed on mouse down for image tool
       return;
     }
   };
@@ -336,6 +334,7 @@ export default function Canvas({ tool: initialTool = 'pen', color: initialColor 
   };
 
   const handleTransformEnd = (e: Konva.KonvaEventObject<Event>) => {
+    // 'e' is used to access e.target.id()
     const id = e.target.id();
     const shape = shapes.find(s => s.id === id);
     if (shape) {
@@ -709,7 +708,7 @@ export default function Canvas({ tool: initialTool = 'pen', color: initialColor 
           autoFocus
           className="absolute border-none outline-none bg-transparent"
           style={{
-            left: shapes.find(s => s.id === editingTextId)!.x * scale,
+            left: shapes.find(s => s.id === editingTextId)!.x * scale, 
             top: shapes.find(s => s.id === editingTextId)!.y * scale,
             fontSize: (shapes.find(s => s.id === editingTextId)?.fontSize || 20) * scale,
             color: shapes.find(s => s.id === editingTextId)?.fill || color,
